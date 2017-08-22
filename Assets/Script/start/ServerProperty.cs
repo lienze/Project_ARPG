@@ -6,7 +6,7 @@ public class ServerProperty : MonoBehaviour
 {
 
     public string ip = "127.0.0.1:7878";
-    public string _name;
+    public string _name = "siki";
     public string Name
     {
         get {
