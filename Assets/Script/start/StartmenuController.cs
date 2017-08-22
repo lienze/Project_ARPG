@@ -8,6 +8,8 @@ public class StartmenuController : MonoBehaviour {
 	public TweenScale loginpanelTween;
 	public TweenScale registerpanelTween;
     public TweenScale serverpanelTween;
+	public TweenPosition startpanelTweenPos;
+	public TweenPosition characterselectTween;
 
 	public UIInput usernameInputLogin;
 	public UIInput passwordInputLogin;
@@ -57,7 +59,10 @@ public class StartmenuController : MonoBehaviour {
 		//TODO
 
 		//2.进入角色选择界面
-		//TODO
+		startpanelTweenPos.PlayForward();
+		HidePanel(startpanelTweenPos.gameObject);
+		characterselectTween.gameObject.SetActive(true);
+		characterselectTween.PlayForward();
 	}
 
 	//隐藏面板
