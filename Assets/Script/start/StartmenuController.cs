@@ -13,9 +13,11 @@ public class StartmenuController : MonoBehaviour {
 	public UIInput passwordInputLogin;
 
 	public UILabel usernameLabelStart;
+    public UILabel servernameLabelStart;
 
 	public static string username;
 	public static string password;
+    public static ServerProperty sp;
 
 	public UIInput usernameInputRegister;
 	public UIInput passwordInutRegister;
@@ -27,6 +29,8 @@ public class StartmenuController : MonoBehaviour {
     public GameObject serveritemGreen;
 
     private bool haveInitServerlist = false;
+
+    public GameObject serverSelectedGo;
 
     void Start() {
         InitServerlist();//初始化服务器列表
@@ -140,7 +144,7 @@ public class StartmenuController : MonoBehaviour {
             }
             ServerProperty sp = go.GetComponent<ServerProperty>();
             sp.ip = ip;
-            sp.name = name;
+            sp.Name = name;
             sp.count = count;
 
             //serverlistGrid.gameObject.AddChild(go.transform);
@@ -148,6 +152,23 @@ public class StartmenuController : MonoBehaviour {
         }
 
         haveInitServerlist = true;
+    }
+
+    public void OnServerselect(GameObject serverGo) {
+        sp = serverGo.GetComponent<ServerProperty>();
+        serverSelectedGo.GetComponent<UISprite>().spriteName = serverGo.GetComponent<UISprite>().spriteName;
+        serverSelectedGo.transform.Find("Label").GetComponent<UILabel>().text = sp.Name;
+    }
+
+    public void OnServerpanelClose() {
+        //隐藏服务器列表
+        serverpanelTween.PlayReverse();
+        StartCoroutine(HidePanel(serverpanelTween.gameObject));
+        //显示开始界面
+        startpanelTween.gameObject.SetActive(true);
+        startpanelTween.PlayReverse();
+
+        servernameLabelStart.text = sp.Name;
     }
 }
 
