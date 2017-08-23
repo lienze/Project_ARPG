@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class StartmenuController : MonoBehaviour {
 
+    public static StartmenuController _instance;
+
 	public TweenScale startpanelTween;
 	public TweenScale loginpanelTween;
 	public TweenScale registerpanelTween;
     public TweenScale serverpanelTween;
 	public TweenPosition startpanelTweenPos;
 	public TweenPosition characterselectTween;
+    public TweenPosition charactershowTween;
 
 	public UIInput usernameInputLogin;
 	public UIInput passwordInputLogin;
@@ -33,6 +36,22 @@ public class StartmenuController : MonoBehaviour {
     private bool haveInitServerlist = false;
 
     public GameObject serverSelectedGo;
+
+    public GameObject[] characterArray;
+    public GameObject[] characterSelectedArray;
+
+    private GameObject characterSelected;//当前选择的角色
+
+    public UIInput characternameInput;
+    public Transform characterSelectedParent;
+
+    public UILabel nameLabelCharacterselect;
+
+    public UILabel levelLabelCharacterselect;
+
+    void Awake() {
+        _instance = this;
+    }
 
     void Start() {
         InitServerlist();//初始化服务器列表
@@ -174,6 +193,64 @@ public class StartmenuController : MonoBehaviour {
         startpanelTween.PlayReverse();
 
         servernameLabelStart.text = sp.Name;
+    }
+
+    public void OnCharacterClick( GameObject go) {
+        if (go == characterSelected)
+            return;
+        iTween.ScaleTo(go,new Vector3(1.5f,1.5f,1.5f), 0.5f);
+        if (characterSelected != null) {
+            iTween.ScaleTo(characterSelected, new Vector3(1f, 1f, 1f), 0.5f);
+        }
+        characterSelected = go;
+    }
+
+    //当点击了更换角色按钮
+    public void OnButtonChangecharacterClick() {
+        characterselectTween.PlayReverse();
+        HidePanel(characterselectTween.gameObject);
+        //显示展示角色的面板
+        charactershowTween.gameObject.SetActive(true);
+        charactershowTween.PlayForward();
+    }
+
+    public void OnCharactershowButtonSureClick() {
+        //1.判断姓名输入的是否正确
+        //TODO
+        //2.判断是否选择角色
+        //TODO
+
+        int index = -1;
+        for (int i = 0; i < characterArray.Length; i++) {
+            if (characterSelected == characterArray[i]) {
+                index = i;
+                break;
+            }
+        }
+        if (index == -1) {
+            return;
+        }
+        //销毁现有的角色
+        GameObject.Destroy(characterSelectedParent.GetComponentInChildren<Animation>().gameObject);
+        //创建新选择的角色
+        GameObject go = GameObject.Instantiate(characterSelectedArray[index], Vector3.zero, Quaternion.identity) as GameObject;
+        go.transform.parent = characterSelectedParent;
+        go.transform.localPosition = Vector3.zero;
+        go.transform.localRotation = Quaternion.identity;
+        go.transform.localScale = new Vector3(1, 1, 1);
+        //更新角色的名字和等级
+        nameLabelCharacterselect.text = characternameInput.value;
+        levelLabelCharacterselect.text = "Lv.1";
+        OnCharactershowButtonBackClick();
+
+    }
+    public void OnCharactershowButtonBackClick() {
+        charactershowTween.PlayReverse();
+        HidePanel(charactershowTween.gameObject);
+
+        characterSelected.gameObject.SetActive(true);
+        characterselectTween.PlayForward();
+
     }
 }
 
