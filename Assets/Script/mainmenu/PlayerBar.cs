@@ -50,7 +50,7 @@ public class PlayerBar : MonoBehaviour {
         nameLabel.text = info.Name.ToString();
         energySlider.value = info.Energy / 100f;
         energyLabel.text = info.Energy + "/100";
-        toughenSlider.value = info.Toughten / 100f;
-        toughenLabel.text = info.Toughten + "/50";
+        toughenSlider.value = info.Toughen / 100f;
+        toughenLabel.text = info.Toughen + "/50";
     }
 }

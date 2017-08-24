@@ -29,11 +29,11 @@ public class PlayerInfo : MonoBehaviour {
     private int _diamond;
     private int _coin;
     private int _energy;
-    private int _toughten;
+    private int _toughen;
     #endregion
 
-    private float energyTimer = 0;
-    private float toughenTimer = 0;
+    public float energyTimer = 0;
+    public float toughenTimer = 0;
 
     public delegate void OnPlayerInfoChangedEvent(InfoType type);
     public event OnPlayerInfoChangedEvent OnPlayerInfoChanged;
@@ -103,12 +103,12 @@ public class PlayerInfo : MonoBehaviour {
             _energy = value;
         }
     }
-    public int Toughten {
+    public int Toughen {
         get {
-            return _toughten;
+            return _toughen;
         }
         set {
-            _toughten = value;
+            _toughen = value;
         }
     }
     #endregion
@@ -135,10 +135,10 @@ public class PlayerInfo : MonoBehaviour {
             this.energyTimer = 0;
         }
 
-        if (this.Toughten < 50) {
+        if (this.Toughen < 50) {
             toughenTimer += Time.deltaTime;
             if (toughenTimer > 60) {
-                Toughten += 1;
+                Toughen += 1;
                 toughenTimer -= 60;
                 OnPlayerInfoChanged(InfoType.Toughen);
             }
@@ -158,7 +158,7 @@ public class PlayerInfo : MonoBehaviour {
         this.Level = 12;
         this.Name = "千颂伊";
         this.Power = 1745;
-        this.Toughten = 34;
+        this.Toughen = 34;
         OnPlayerInfoChanged(InfoType.All);
     }
 }
