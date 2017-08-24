@@ -20,8 +20,15 @@ public class PlayerStatus : MonoBehaviour {
     private UILabel toughenLabel;
     private UILabel toughenRestorePartLabel;
     private UILabel toughenRestoreAllLabel;
-    private UIButton closeButton;
+
     private TweenPosition tween;
+    private UIButton closeButton;
+
+    private UIButton changeNameButton;
+    private GameObject changeNameGo;
+    private UIInput nameInput;
+    private UIButton sureButton;
+    private UIButton cancelButton;
 
     void Awake() {
 
@@ -41,11 +48,30 @@ public class PlayerStatus : MonoBehaviour {
         toughenLabel = transform.Find("ToughenLabel/NumberLabel").GetComponent<UILabel>();
         toughenRestorePartLabel = transform.Find("ToughenLabel/RestorePartTime").GetComponent<UILabel>();
         toughenRestoreAllLabel = transform.Find("ToughenLabel/RestoreAllTime").GetComponent<UILabel>();
+        tween = this.GetComponent<TweenPosition>();
         closeButton = transform.Find("ButtonClose").GetComponent<UIButton>();
+
+        changeNameButton = transform.Find("ButtonChangeName").GetComponent<UIButton>();
+        changeNameGo = transform.Find("ChangeNameBg").gameObject;
+        nameInput = transform.Find("ChangeNameBg/NameInput").GetComponent<UIInput>();
+  
+        changeNameGo.SetActive(false);
+  
+        sureButton = transform.Find("ChangeNameBg/SureButton").GetComponent<UIButton>();
+        cancelButton = transform.Find("ChangeNameBg/CancelButton").GetComponent<UIButton>();
+
         EventDelegate ed = new EventDelegate(this, "OnButtonCloseClick");
         closeButton.onClick.Add(ed);
 
-        tween = this.GetComponent<TweenPosition>();
+        EventDelegate ed2 = new EventDelegate(this, "OnButtonChangeNameClick");
+        changeNameButton.onClick.Add(ed2);
+
+        EventDelegate ed3 = new EventDelegate(this, "OnButtonSureClick");
+        sureButton.onClick.Add(ed3);
+
+        EventDelegate ed4 = new EventDelegate(this, "OnButtonCancelClick");
+        cancelButton.onClick.Add(ed4);
+
         PlayerInfo._instance.OnPlayerInfoChanged += this.OnPlayerInfoChanged;
     }
 
@@ -121,5 +147,16 @@ public class PlayerStatus : MonoBehaviour {
 
     public void OnButtonCloseClick() {
         tween.PlayReverse();
+    }
+
+    public void OnButtonChangeNameClick() {
+        changeNameGo.SetActive(true);
+    }
+    public void OnButtonSureClick() {
+        PlayerInfo._instance.ChangeName(nameInput.value);
+        changeNameGo.SetActive(false);
+    }
+    public void OnButtonCancelClick() {
+        changeNameGo.SetActive(false);
     }
 }

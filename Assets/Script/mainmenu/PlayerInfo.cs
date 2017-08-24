@@ -161,4 +161,9 @@ public class PlayerInfo : MonoBehaviour {
         this.Toughen = 34;
         OnPlayerInfoChanged(InfoType.All);
     }
+
+    public void ChangeName(string newName) {
+        this.Name = newName;
+        OnPlayerInfoChanged(InfoType.Name);
+    }
 }

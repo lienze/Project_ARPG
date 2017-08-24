@@ -45,7 +45,6 @@ public class PlayerBar : MonoBehaviour {
 
     //更新显示
     void UpdateShow() {
-        print("UpdateShow");
         PlayerInfo info = PlayerInfo._instance;
         headSprite.spriteName = info.HeadProtrait;
         levelLabel.text = info.Level.ToString();
