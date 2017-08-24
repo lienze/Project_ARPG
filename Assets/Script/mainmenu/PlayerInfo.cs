@@ -156,7 +156,7 @@ public class PlayerInfo : MonoBehaviour {
         this.Exp = 123;
         this.HeadProtrait = "头像底板女性";
         this.Level = 12;
-        this.Name = "千颂伊";
+        this.Name = "千颂伊123";
         this.Power = 1745;
         this.Toughen = 34;
         OnPlayerInfoChanged(InfoType.All);

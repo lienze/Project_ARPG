@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerStatus : MonoBehaviour {
 
+    public static PlayerStatus _instance;
+
     private UISprite headSprite;
     private UILabel levelLabel;
     private UILabel nameLabel;
@@ -18,8 +20,13 @@ public class PlayerStatus : MonoBehaviour {
     private UILabel toughenLabel;
     private UILabel toughenRestorePartLabel;
     private UILabel toughenRestoreAllLabel;
+    private UIButton closeButton;
+    private TweenPosition tween;
 
     void Awake() {
+
+        _instance = this;
+
         headSprite = transform.Find("HeadSprite").GetComponent<UISprite>();
         levelLabel = transform.Find("LevelLabel").GetComponent<UILabel>();
         nameLabel = transform.Find("NameLabel").GetComponent<UILabel>();
@@ -34,6 +41,11 @@ public class PlayerStatus : MonoBehaviour {
         toughenLabel = transform.Find("ToughenLabel/NumberLabel").GetComponent<UILabel>();
         toughenRestorePartLabel = transform.Find("ToughenLabel/RestorePartTime").GetComponent<UILabel>();
         toughenRestoreAllLabel = transform.Find("ToughenLabel/RestoreAllTime").GetComponent<UILabel>();
+        closeButton = transform.Find("ButtonClose").GetComponent<UIButton>();
+        EventDelegate ed = new EventDelegate(this, "OnButtonCloseClick");
+        closeButton.onClick.Add(ed);
+
+        tween = this.GetComponent<TweenPosition>();
         PlayerInfo._instance.OnPlayerInfoChanged += this.OnPlayerInfoChanged;
     }
 
@@ -103,5 +115,11 @@ public class PlayerStatus : MonoBehaviour {
         }
     }
 
+    public void Show() {
+        tween.PlayForward();
+    }
 
+    public void OnButtonCloseClick() {
+        tween.PlayReverse();
+    }
 }

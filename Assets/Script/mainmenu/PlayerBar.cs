@@ -14,6 +14,8 @@ public class PlayerBar : MonoBehaviour {
     private UIButton energyPlusButton;
     private UIButton toughtenPlusButton;
 
+    private UIButton headButton;
+
     void Awake() {
         headSprite = transform.Find("HeadSprite").GetComponent<UISprite>();
         nameLabel = transform.Find("NameLabel").GetComponent<UILabel>();
@@ -24,15 +26,14 @@ public class PlayerBar : MonoBehaviour {
         toughenLabel = transform.Find("ToughenProgressBar/Label").GetComponent<UILabel>();
         energyPlusButton = transform.Find("EnergyPlusButton").GetComponent<UIButton>();
         toughtenPlusButton = transform.Find("ToughenPlusButton").GetComponent<UIButton>();
-    }
-
-    void Start() {
+        headButton = transform.Find("HeadButton").GetComponent<UIButton>();
+        EventDelegate ed = new EventDelegate(this, "OnHeadButtonClick");
+        headButton.onClick.Add(ed);
         PlayerInfo._instance.OnPlayerInfoChanged += this.OnPlayerInfoChanged;
     }
 
     void OnDestory() {
         PlayerInfo._instance.OnPlayerInfoChanged -= this.OnPlayerInfoChanged;
-
     }
 
     //当我们的主角信息发生改变的时候会触发这个方法
@@ -44,6 +45,7 @@ public class PlayerBar : MonoBehaviour {
 
     //更新显示
     void UpdateShow() {
+        print("UpdateShow");
         PlayerInfo info = PlayerInfo._instance;
         headSprite.spriteName = info.HeadProtrait;
         levelLabel.text = info.Level.ToString();
@@ -52,5 +54,9 @@ public class PlayerBar : MonoBehaviour {
         energyLabel.text = info.Energy + "/100";
         toughenSlider.value = info.Toughen / 100f;
         toughenLabel.text = info.Toughen + "/50";
+    }
+
+    public void OnHeadButtonClick() {
+        PlayerStatus._instance.Show();
     }
 }
