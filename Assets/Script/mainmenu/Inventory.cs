@@ -4,7 +4,8 @@ using UnityEngine;
 public enum InventoryType
 {
     Equip,
-    Drug
+    Drug,
+    Box
 }
 
 public enum EquipType
@@ -60,7 +61,7 @@ public class Inventory {
             icon = value;
         }
     }
-    public InventoryType InventoryType {
+    public InventoryType InventoryTYPE {
         get {
             return inventoryType;
         }
