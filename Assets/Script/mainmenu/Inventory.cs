@@ -25,8 +25,6 @@ public class Inventory {
     private string icon;//在图集中的名称
     private InventoryType inventoryType;//物品类型
     private EquipType equipType;//装备类型
-    private int level = 1;//装备等级
-    private int count = 1;//物品的数量
     private int price = 0;//价格
     private int starLevel = 0;//星级
     private int quality = 1;//品质
@@ -62,7 +60,7 @@ public class Inventory {
             icon = value;
         }
     }
-    public InventoryType inventoryType {
+    public InventoryType InventoryType {
         get {
             return inventoryType;
         }
@@ -70,28 +68,12 @@ public class Inventory {
             inventoryType = value;
         }
     }
-    public EquipType equipType {
+    public EquipType EquipTYPE {
         get {
             return equipType;
         }
         set {
             equipType = value;
-        }
-    }
-    public int Level {
-        get {
-            return level;
-        }
-        set {
-            level = value;
-        }
-    }
-    public int Count {
-        get {
-            return count;
-        }
-        set {
-            count = value;
         }
     }
     public int Price {
@@ -142,7 +124,7 @@ public class Inventory {
             power = value;
         }
     }
-    public InfoType infoType {
+    public InfoType InfoTYPE {
         get {
             return infoType;
         }
