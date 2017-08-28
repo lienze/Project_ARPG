@@ -5,16 +5,20 @@ using UnityEngine;
 public class InventoryManager : MonoBehaviour {
 
     public static InventoryManager _instance;
-
-
     public TextAsset listinfo;
     public Dictionary<int, Inventory> inventoryDict = new Dictionary<int, Inventory>();
     //public Dictionary<int, InventoryItem> inventoryItemDict = new Dictionary<int, InventoryItem>();
     public List<InventoryItem> inventoryItemList = new List<InventoryItem>();
 
+    public delegate void OnInventoryChangeEvent();
+    public event OnInventoryChangeEvent OnInventoryChange;
+
     void Awake() {
         _instance = this;
         ReadInventoryInfo();
+    }
+
+    void Start() {
         ReadInventoryItemInfo();
     }
 
@@ -122,5 +126,6 @@ public class InventoryManager : MonoBehaviour {
                 }
             }
         }
+        OnInventoryChange();
     }
 }
