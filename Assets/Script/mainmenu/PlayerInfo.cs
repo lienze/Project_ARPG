@@ -13,6 +13,9 @@ public enum InfoType
     Coin,
     Energy,
     Toughen,
+    HP,
+    Damage,
+    Equip,
     All
 }
 
@@ -32,14 +35,14 @@ public class PlayerInfo : MonoBehaviour {
     private int _toughen;
     private int _hp;
     private int _damage;
-    private int _helmID;
-    private int _clothID;
-    private int _weaponID;
-    private int _shoesID;
-    private int _necklaceID;
-    private int _braceletID;
-    private int _ringID;
-    private int _wingID;
+    private int _helmID = 0;
+    private int _clothID = 0;
+    private int _weaponID = 0;
+    private int _shoesID = 0;
+    private int _necklaceID = 0;
+    private int _braceletID = 0;
+    private int _ringID = 0;
+    private int _wingID = 0;
     #endregion
 
     public float energyTimer = 0;
@@ -247,13 +250,55 @@ public class PlayerInfo : MonoBehaviour {
         this.HeadProtrait = "头像底板女性";
         this.Level = 12;
         this.Name = "千颂伊123";
-        this.Power = 1745;
         this.Toughen = 34;
+
+        this.BraceletID = 1001;
+        this.WingID = 1002;
+        this.RingID = 1003;
+        this.ClothID = 1004;
+        this.HelmID = 1005;
+        this.WeaponID = 1006;
+        this.NecklaceID = 1007;
+        this.ShoesID = 1008;
+
+        InitHPDamagePower();
+
         OnPlayerInfoChanged(InfoType.All);
     }
 
     public void ChangeName(string newName) {
         this.Name = newName;
         OnPlayerInfoChanged(InfoType.Name);
+    }
+
+    void InitHPDamagePower() {
+        this.HP = this.Level * 100;
+        this.Damage = this.Level * 50;
+        this.Power = this.HP + this.Damage;
+        PutonEquip(BraceletID);
+        PutonEquip(WingID);
+        PutonEquip(RingID);
+        PutonEquip(ClothID);
+        PutonEquip(HelmID);
+        PutonEquip(WeaponID);
+        PutonEquip(NecklaceID);
+        PutonEquip(ShoesID);
+    }
+
+    void PutonEquip(int id) {
+        if (id == 0) return;
+        Inventory inventory = null;
+        bool isExit = InventoryManager._instance.inventoryDict.TryGetValue(id,out inventory);
+        this.HP += inventory.HP;
+        this.Damage += inventory.Damage;
+        this.Power += inventory.Power;
+    }
+    void PutoffEquip(int id) {
+        if (id == 0) return;
+        Inventory inventory = null;
+        bool isExit = InventoryManager._instance.inventoryDict.TryGetValue(id, out inventory);
+        this.HP -= inventory.HP;
+        this.Damage -= inventory.Damage;
+        this.Power -= inventory.Power;
     }
 }

@@ -4,13 +4,30 @@ using UnityEngine;
 
 public class InventoryManager : MonoBehaviour {
 
+    public static InventoryManager _instance;
+
+
     public TextAsset listinfo;
-    private Dictionary<int, Inventory> inventoryDict = new Dictionary<int, Inventory>();
+    public Dictionary<int, Inventory> inventoryDict = new Dictionary<int, Inventory>();
+    //public Dictionary<int, InventoryItem> inventoryItemDict = new Dictionary<int, InventoryItem>();
+    public List<InventoryItem> inventoryItemList = new List<InventoryItem>();
+
+    void Awake() {
+        _instance = this;
+        ReadInventoryInfo();
+        ReadInventoryItemInfo();
+    }
 
     void ReadInventoryInfo() {
         string str = listinfo.ToString();
         string[] itemStrArray = str.Split('\n');
+        int j = 0;
         foreach (string itemStr in itemStrArray) {
+            if (j == 0) {
+                j++;
+                continue;
+            }
+            
             string[] proArray = itemStr.Split('|');
             Inventory inventory = new Inventory();
             inventory.ID = int.Parse(proArray[0]);
@@ -67,8 +84,43 @@ public class InventoryManager : MonoBehaviour {
                 inventory.ApplyValue = int.Parse(proArray[12]);
             }
             inventory.Des = proArray[13];
-
             inventoryDict.Add(inventory.ID, inventory);
+        }
+    }
+
+    //完成角色背包信息的初始化，获得拥有的物品
+    void ReadInventoryItemInfo() {
+        for (int j = 0; j < 20; j++) {
+            int id = Random.Range(1001, 1020);
+            Inventory i = null;
+            inventoryDict.TryGetValue(id, out i);
+            if (i.InventoryTYPE == InventoryType.Equip) {
+                InventoryItem it = new InventoryItem();
+                it.Inventory = i;
+                it.Level = Random.Range(1, 10);
+                it.Count = 1;
+                inventoryItemList.Add(it);
+            }
+            else {
+                InventoryItem it = null;
+                bool isExit = false;
+                foreach (InventoryItem temp in inventoryItemList) {
+                    if (temp.Inventory.ID == id) {
+                        isExit = true;
+                        it = temp;
+                        break;
+                    }
+                }
+                if (isExit) {
+                    it.Count++;
+                }
+                else {
+                    it = new InventoryItem();
+                    it.Inventory = i;
+                    it.Count = 1;
+                    inventoryItemList.Add(it);
+                }
+            }
         }
     }
 }
