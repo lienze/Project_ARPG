@@ -5,6 +5,7 @@ public class InventoryItem{
     private Inventory inventory;
     private int level;
     private int count;
+    private bool isDressed = false;
 
     public Inventory Inventory {
         get {
@@ -30,6 +31,15 @@ public class InventoryItem{
         }
         set {
             count = value;
+        }
+    }
+
+    public bool IsDressed{
+        get{
+            return isDressed;
+        }
+        set{
+            isDressed = true;
         }
     }
 }

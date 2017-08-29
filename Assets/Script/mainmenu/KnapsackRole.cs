@@ -58,14 +58,14 @@ public class KnapsackRole : MonoBehaviour {
 
     void UpdateShow() {
         PlayerInfo info = PlayerInfo._instance;
-        helmEquip.SetId(info.HelmID);
-        clothEquip.SetId(info.ClothID);
-        weaponEquip.SetId(info.WeaponID);
-        shoesEquip.SetId(info.ShoesID);
-        necklackEquip.SetId(info.NecklaceID);
-        braceletEquip.SetId(info.BraceletID);
-        ringEquip.SetId(info.RingID);
-        wingEquip.SetId(info.WingID);
+//        helmEquip.SetId(info.HelmID);
+//        clothEquip.SetId(info.ClothID);
+//        weaponEquip.SetId(info.WeaponID);
+//        shoesEquip.SetId(info.ShoesID);
+//        necklackEquip.SetId(info.NecklaceID);
+//        braceletEquip.SetId(info.BraceletID);
+//        ringEquip.SetId(info.RingID);
+//        wingEquip.SetId(info.WingID);
 
         hpLabel.text = info.HP.ToString();
         damageLabel.text = info.Damage.ToString();

@@ -35,14 +35,24 @@ public class PlayerInfo : MonoBehaviour {
     private int _toughen;
     private int _hp;
     private int _damage;
-    private int _helmID = 0;
-    private int _clothID = 0;
-    private int _weaponID = 0;
-    private int _shoesID = 0;
-    private int _necklaceID = 0;
-    private int _braceletID = 0;
-    private int _ringID = 0;
-    private int _wingID = 0;
+
+//    private int _helmID = 0;
+//    private int _clothID = 0;
+//    private int _weaponID = 0;
+//    private int _shoesID = 0;
+//    private int _necklaceID = 0;
+//    private int _braceletID = 0;
+//    private int _ringID = 0;
+//    private int _wingID = 0;
+
+    public InventoryItem helmInventoryItem;
+    public InventoryItem clothInventoryItem;
+    public InventoryItem weaponInventoryItem;
+    public InventoryItem shoesInventoryItem;
+    public InventoryItem necklaceInventoryItem;
+    public InventoryItem braceletInventoryItem;
+    public InventoryItem ringInventoryItem;
+    public InventoryItem wingInventoryItem;
     #endregion
 
     public float energyTimer = 0;
@@ -140,70 +150,70 @@ public class PlayerInfo : MonoBehaviour {
             _damage = value;
         }
     }
-    public int HelmID {
-        get {
-            return _helmID;
-        }
-        set {
-            _helmID = value;
-        }
-    }
-    public int ClothID {
-        get {
-            return _clothID;
-        }
-        set {
-            _clothID = value;
-        }
-    }
-    public int WeaponID {
-        get {
-            return _weaponID;
-        }
-        set {
-            _weaponID = value;
-        }
-    }
-    public int ShoesID {
-        get {
-            return _shoesID;
-        }
-        set {
-            _shoesID = value;
-        }
-    }
-    public int NecklaceID {
-        get {
-            return _necklaceID;
-        }
-        set {
-            _necklaceID = value;
-        }
-    }
-    public int BraceletID {
-        get {
-            return _braceletID;
-        }
-        set {
-            _braceletID = value;
-        }
-    }
-    public int RingID {
-        get {
-            return _ringID;
-        }
-        set {
-            _ringID = value;
-        }
-    }
-    public int WingID {
-        get {
-            return _wingID;
-        }
-        set {
-            _wingID = value;
-        }
-    }
+//    public int HelmID {
+//        get {
+//            return _helmID;
+//        }
+//        set {
+//            _helmID = value;
+//        }
+//    }
+//    public int ClothID {
+//        get {
+//            return _clothID;
+//        }
+//        set {
+//            _clothID = value;
+//        }
+//    }
+//    public int WeaponID {
+//        get {
+//            return _weaponID;
+//        }
+//        set {
+//            _weaponID = value;
+//        }
+//    }
+//    public int ShoesID {
+//        get {
+//            return _shoesID;
+//        }
+//        set {
+//            _shoesID = value;
+//        }
+//    }
+//    public int NecklaceID {
+//        get {
+//            return _necklaceID;
+//        }
+//        set {
+//            _necklaceID = value;
+//        }
+//    }
+//    public int BraceletID {
+//        get {
+//            return _braceletID;
+//        }
+//        set {
+//            _braceletID = value;
+//        }
+//    }
+//    public int RingID {
+//        get {
+//            return _ringID;
+//        }
+//        set {
+//            _ringID = value;
+//        }
+//    }
+//    public int WingID {
+//        get {
+//            return _wingID;
+//        }
+//        set {
+//            _wingID = value;
+//        }
+//    }
     #endregion
 
     #region unity event
@@ -252,14 +262,14 @@ public class PlayerInfo : MonoBehaviour {
         this.Name = "千颂伊123";
         this.Toughen = 34;
 
-        this.BraceletID = 1001;
-        this.WingID = 1002;
-        this.RingID = 1003;
-        this.ClothID = 1004;
-        this.HelmID = 1005;
-        this.WeaponID = 1006;
-        this.NecklaceID = 1007;
-        this.ShoesID = 1008;
+//        this.BraceletID = 1001;
+//        this.WingID = 1002;
+//        this.RingID = 1003;
+//        this.ClothID = 1004;
+//        this.HelmID = 1005;
+//        this.WeaponID = 1006;
+//        this.NecklaceID = 1007;
+//        this.ShoesID = 1008;
 
         InitHPDamagePower();
 
@@ -275,14 +285,6 @@ public class PlayerInfo : MonoBehaviour {
         this.HP = this.Level * 100;
         this.Damage = this.Level * 50;
         this.Power = this.HP + this.Damage;
-        PutonEquip(BraceletID);
-        PutonEquip(WingID);
-        PutonEquip(RingID);
-        PutonEquip(ClothID);
-        PutonEquip(HelmID);
-        PutonEquip(WeaponID);
-        PutonEquip(NecklaceID);
-        PutonEquip(ShoesID);
     }
 
     void PutonEquip(int id) {
