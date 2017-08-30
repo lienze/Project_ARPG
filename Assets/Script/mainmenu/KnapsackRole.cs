@@ -51,7 +51,7 @@ public class KnapsackRole : MonoBehaviour {
     }
 
     void OnPlayerInfoChanged(InfoType type) {
-        if (type == InfoType.All || type == InfoType.Damage || type == InfoType.HP) {
+        if (type == InfoType.All || type == InfoType.Damage || type == InfoType.HP || type == InfoType.Exp || type == InfoType.Equip) {
             UpdateShow();
         }
     }
@@ -66,6 +66,15 @@ public class KnapsackRole : MonoBehaviour {
 //        braceletEquip.SetId(info.BraceletID);
 //        ringEquip.SetId(info.RingID);
 //        wingEquip.SetId(info.WingID);
+
+        helmEquip.SetInventoryItem(info.helmInventoryItem);
+        clothEquip.SetInventoryItem(info.clothInventoryItem);
+        weaponEquip.SetInventoryItem(info.weaponInventoryItem);
+        shoesEquip.SetInventoryItem(info.shoesInventoryItem);
+        necklackEquip.SetInventoryItem(info.necklaceInventoryItem);
+        braceletEquip.SetInventoryItem(info.braceletInventoryItem);
+        ringEquip.SetInventoryItem(info.ringInventoryItem);
+        wingEquip.SetInventoryItem(info.wingInventoryItem);
 
         hpLabel.text = info.HP.ToString();
         damageLabel.text = info.Damage.ToString();

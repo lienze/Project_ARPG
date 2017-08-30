@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class InventoryUI : MonoBehaviour {
 
-    public List<InventoryItemUI> itemUIList = new List<InventoryItemUI>();
+    public static InventoryUI _instance;
+
+    public List<InventoryItemUI> itemUIList = new List<InventoryItemUI>();//所有的物品格子
 
     void Awake() {
+        _instance = this;
         InventoryManager._instance.OnInventoryChange += this.OnInventoryChange;
     }
 
@@ -26,6 +29,15 @@ public class InventoryUI : MonoBehaviour {
         }
         for (int i = InventoryManager._instance.inventoryItemList.Count; i < itemUIList.Count; i++) {
             itemUIList[i].Clear();
+        }
+    }
+
+    public void AddInventoryItem(InventoryItem it){
+        foreach (InventoryItemUI itUI in itemUIList) {
+            if (itUI.it == null) {
+                itUI.SetInventoryItem(it);
+                break;
+            }
         }
     }
 }
