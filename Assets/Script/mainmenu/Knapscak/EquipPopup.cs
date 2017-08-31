@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class EquipPopup : MonoBehaviour {
 
+    public PowerShow powerShow;
+
     private InventoryItem it;
     private InventoryItemUI itUI;
     private KnapsackRoleEquip roleEquip;
-
 
     private UISprite equipSprite;
     private UILabel nameLabel;
@@ -80,6 +81,7 @@ public class EquipPopup : MonoBehaviour {
 
     //点击卸下按钮和装备按钮的时候出发
     public void OnEquip(){
+        int startValue = PlayerInfo._instance.GetOverallPower();
         if (isLeft) {//从背包装备到身上
             itUI.Clear();//清空该装备所在的格子
             PlayerInfo._instance.DressOn(it);
@@ -89,6 +91,8 @@ public class EquipPopup : MonoBehaviour {
         }
         ClearObject();
         gameObject.SetActive(false);
+        int endValue = PlayerInfo._instance.GetOverallPower();
+        powerShow.ShowPowerChange(startValue, endValue);
     }
 
     //点击了升级按钮
