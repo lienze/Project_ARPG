@@ -45,7 +45,6 @@ public class InventoryItemUI : MonoBehaviour
     }
 
     public void OnPress(bool isPress){
-        print("hhh");
         if (isPress && it!=null) {
             object[] objectArray = new object[3];
             objectArray[0] = it;

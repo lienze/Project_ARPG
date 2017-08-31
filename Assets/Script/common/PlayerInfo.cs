@@ -407,6 +407,16 @@ public class PlayerInfo : MonoBehaviour {
         OnPlayerInfoChanged(InfoType.Equip);
     }
 
+    //取得需要个数的金币数
+    public bool GetCoin(int count){
+        if (Coin >= count) {
+            Coin -= count;
+            OnPlayerInfoChanged(InfoType.Coin);
+            return true;
+        }
+        return false;
+    }
+
     void InitHPDamagePower() {
         this.HP = this.Level * 100;
         this.Damage = this.Level * 50;

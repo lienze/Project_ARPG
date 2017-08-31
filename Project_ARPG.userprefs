@@ -1,8 +1,13 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/mainmenu/EquipPopup.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/mainmenu/Knapsack.cs">
     <Files>
-      <File FileName="Assets/Script/mainmenu/EquipPopup.cs" Line="41" Column="59" />
+      <File FileName="Assets/Script/mainmenu/PlayerInfo.cs" Line="407" Column="45" />
+      <File FileName="Assets/Script/mainmenu/EquipPopup.cs" Line="46" Column="21" />
+      <File FileName="Assets/Script/mainmenu/InventoryItemUI.cs" Line="52" Column="34" />
+      <File FileName="Assets/Script/mainmenu/Knapsack.cs" Line="30" Column="9" />
+      <File FileName="Assets/Script/mainmenu/InventoryUI.cs" Line="39" Column="23" />
+      <File FileName="Assets/Script/mainmenu/KnapsackRole.cs" Line="83" Column="9" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
