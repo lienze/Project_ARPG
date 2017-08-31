@@ -54,4 +54,13 @@ public class InventoryItemUI : MonoBehaviour
         }
     }
 
+    public void ChangeCount(int count){
+        if (it.Count - count <= 0) {
+            Clear();
+        } else if (it.Count - count == 1) {
+            label.text = "";
+        } else {
+            label.text = (it.Count - count).ToString();
+        }
+    }
 }
