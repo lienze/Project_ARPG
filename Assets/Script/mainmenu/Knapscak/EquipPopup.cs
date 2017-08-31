@@ -93,6 +93,8 @@ public class EquipPopup : MonoBehaviour {
         gameObject.SetActive(false);
         int endValue = PlayerInfo._instance.GetOverallPower();
         powerShow.ShowPowerChange(startValue, endValue);
+
+        InventoryUI._instance.SendMessage("UpdateCount");
     }
 
     //点击了升级按钮
