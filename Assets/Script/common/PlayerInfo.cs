@@ -428,6 +428,11 @@ public class PlayerInfo : MonoBehaviour {
         return false;
     }
 
+    public void AddCoin(int count){
+        this.Coin += count;
+        OnPlayerInfoChanged(InfoType.Coin);
+    }
+
     public int GetOverallPower(){
         int power = this.Power;
         if (helmInventoryItem != null) {
