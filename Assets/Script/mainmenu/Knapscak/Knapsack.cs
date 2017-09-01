@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Knapsack : MonoBehaviour {
 
+    public static Knapsack _instance;
+
     private EquipPopup equipPopup;
     private InventoryPopup inventoryPopup;
 
@@ -12,18 +14,26 @@ public class Knapsack : MonoBehaviour {
 
     private InventoryItem it;
     private InventoryItemUI itUI;
+    private TweenPosition tween;
+    private UIButton closeKnapsackButton;
 
     void Awake(){
+        _instance = this;
         equipPopup = transform.Find("EquipPopup").GetComponent<EquipPopup>();
         inventoryPopup = transform.Find("InventoryPopup").GetComponent<InventoryPopup>();
 
         saleButton = transform.Find("Inventory/ButtonSale").GetComponent<UIButton>();
         priceLabel = transform.Find("Inventory/PriceBg/Label").GetComponent<UILabel>();
+        tween = this.GetComponent<TweenPosition>();
+        closeKnapsackButton = transform.Find("CloseButton").GetComponent<UIButton>();
         DisableButton();
         priceLabel.text = "";
 
         EventDelegate ed = new EventDelegate(this,"OnSale");
         saleButton.onClick.Add(ed);
+
+        EventDelegate ed2 = new EventDelegate(this,"OnKnapsackClose");
+        closeKnapsackButton.onClick.Add(ed2);
     }
 
     public void OnInventoryClick(object[] objectArray){
@@ -52,6 +62,13 @@ public class Knapsack : MonoBehaviour {
         }
     }
 
+    public void Show(){
+        tween.PlayForward();
+    }
+    public void Hide(){
+        tween.PlayReverse();
+    }
+
     void DisableButton(){
         saleButton.SetState(UIButtonColor.State.Disabled, true);
         saleButton.GetComponent<BoxCollider>().enabled = false;
@@ -73,5 +90,8 @@ public class Knapsack : MonoBehaviour {
         equipPopup.Close();
         inventoryPopup.Close();
         DisableButton();
+    }
+    void OnKnapsackClose(){
+        Hide();
     }
 }
