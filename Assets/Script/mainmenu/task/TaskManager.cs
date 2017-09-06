@@ -6,10 +6,21 @@ public class TaskManager : MonoBehaviour {
     public static TaskManager _instance;
     public TextAsset taskinfoText;
     private ArrayList taskList = new ArrayList();
+    private Task currentTask;
+    private PlayerAutoMove playerAutoMove;
+    private PlayerAutoMove PlayerAutoMove{
+        get{
+            if (playerAutoMove == null) {
+                playerAutoMove = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAutoMove>();
+            }
+            return playerAutoMove;
+        }
+    }
     void Awake(){
         _instance = this;
         InitTask();
     }
+
     /// <summary>
     /// 初始化任务信息
     /// </summary>
@@ -43,5 +54,15 @@ public class TaskManager : MonoBehaviour {
 
     public ArrayList GetTaskList(){
         return taskList;
+    }
+
+    //执行某个任务
+    public void OnExecteTask(Task task){
+        currentTask = task;
+        if (task.TaskPROGRESS == TaskProgress.NoStart) {//导航到npc那里，接受任务
+            PlayerAutoMove.SetDestination(NPCManager._instance.GetNpcById(task.IdNpc).transform.position);
+        } else if (task.TaskPROGRESS == TaskProgress.Accept) {
+            PlayerAutoMove.SetDestination(NPCManager._instance.transcriptGo.transform.position);
+        }
     }
 }

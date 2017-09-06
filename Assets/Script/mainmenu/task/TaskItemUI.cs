@@ -31,6 +31,11 @@ public class TaskItemUI : MonoBehaviour {
         combatButton = transform.Find("CombatButton").GetComponent<UIButton>();
         combatButtonLabel = transform.Find("CombatButton/Label").GetComponent<UILabel>();
 
+        EventDelegate ed1 = new EventDelegate(this, "OnCombat");
+        combatButton.onClick.Add(ed1);
+
+        EventDelegate ed2 = new EventDelegate(this, "OnReward");
+        rewardButton.onClick.Add(ed2);
     }
 
     public void SetTask(Task task){
@@ -81,5 +86,12 @@ public class TaskItemUI : MonoBehaviour {
 
                 break;
         }
+    }
+
+    void OnCombat(){
+        TaskManager._instance.OnExecteTask(task);
+    }
+    void OnReward(){
+
     }
 }

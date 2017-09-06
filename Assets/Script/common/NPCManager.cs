@@ -6,10 +6,9 @@ using System.Collections.Generic;
 public class NPCManager : MonoBehaviour {
 
     public static NPCManager _instance;
-
     public GameObject[] npcArray;
-
     private Dictionary<int,GameObject> npcDict = new Dictionary<int, GameObject>();
+    public GameObject transcriptGo;
 
     void Awake(){
         _instance = this;

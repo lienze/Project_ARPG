@@ -16,15 +16,15 @@ public class PlayerAutoMove : MonoBehaviour {
 
     void Update(){
         if (agent.enabled) {
-            if (agent.remainingDistance < minDistance) {
+            if (agent.remainingDistance < minDistance && agent.remainingDistance!=0) {
                 agent.isStopped = true;
                 agent.enabled = false;
             }
         }
 
-        if (Input.GetMouseButtonDown(0)) {
+        /*if (Input.GetMouseButtonDown(0)) {
             SetDestination(target.position);
-        }
+        }*/
     }
 
     public void SetDestination(Vector3 targetPos){
