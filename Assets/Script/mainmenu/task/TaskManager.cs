@@ -46,6 +46,7 @@ public class TaskManager : MonoBehaviour {
             task.Des = proArray[4];
             task.Coin = int.Parse(proArray[5]);
             task.Diamond = int.Parse(proArray[6]);
+            task.TalkNpc = proArray[7];
             task.IdNpc = int.Parse(proArray[8]);
             task.IdTranscript = int.Parse(proArray[9]);
             taskList.Add(task);
@@ -64,5 +65,16 @@ public class TaskManager : MonoBehaviour {
         } else if (task.TaskPROGRESS == TaskProgress.Accept) {
             PlayerAutoMove.SetDestination(NPCManager._instance.transcriptGo.transform.position);
         }
+    }
+    public void OnAcceptTask(){
+        currentTask.TaskPROGRESS = TaskProgress.Accept;
+        //TODO//寻路到副本入口
+        OnExecteTask(currentTask);
+    }
+    public void OnArriveDestination(){
+        if (currentTask.TaskPROGRESS == TaskProgress.NoStart) {//到达NPC所在
+            NPCDialogUI._instance.Show(currentTask.TalkNpc);
+        }
+        //到达副本入口//TODO
     }
 }

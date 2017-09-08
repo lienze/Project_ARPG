@@ -89,6 +89,7 @@ public class TaskItemUI : MonoBehaviour {
     }
 
     void OnCombat(){
+        TaskUI._instance.Hide();
         TaskManager._instance.OnExecteTask(task);
     }
     void OnReward(){

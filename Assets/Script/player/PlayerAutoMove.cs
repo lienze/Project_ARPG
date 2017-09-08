@@ -19,6 +19,7 @@ public class PlayerAutoMove : MonoBehaviour {
             if (agent.remainingDistance < minDistance && agent.remainingDistance!=0) {
                 agent.isStopped = true;
                 agent.enabled = false;
+                TaskManager._instance.OnArriveDestination();
             }
         }
 
