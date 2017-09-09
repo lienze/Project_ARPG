@@ -22,7 +22,11 @@ public class PlayerAutoMove : MonoBehaviour {
                 TaskManager._instance.OnArriveDestination();
             }
         }
-
+        float h = Input.GetAxis("Horizontal");
+        float v = Input.GetAxis("Vertical");
+        if (Mathf.Abs(h) > 0.05f || Mathf.Abs(v) > 0.05f) {
+            StopAuto();//如果在寻路过程中按下移动控制键，那么就停止寻路
+        }
         /*if (Input.GetMouseButtonDown(0)) {
             SetDestination(target.position);
         }*/
@@ -31,5 +35,12 @@ public class PlayerAutoMove : MonoBehaviour {
     public void SetDestination(Vector3 targetPos){
         agent.enabled = true;
         agent.SetDestination(targetPos);
+    }
+
+    public void StopAuto(){
+        if (agent.enabled) {
+            agent.isStopped = true;
+            agent.enabled = false;
+        }
     }
 }

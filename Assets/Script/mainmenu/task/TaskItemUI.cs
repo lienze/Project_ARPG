@@ -40,6 +40,11 @@ public class TaskItemUI : MonoBehaviour {
 
     public void SetTask(Task task){
         this.task = task;
+        task.OnTaskChage += this.OnTaskChange;
+        UpdateShow();
+    }
+
+    void UpdateShow(){
         switch(task.TaskTYPE){
             case TaskType.Main:
                 tasktypeSprite.spriteName = "pic_主线";
@@ -94,5 +99,9 @@ public class TaskItemUI : MonoBehaviour {
     }
     void OnReward(){
 
+    }
+
+    void OnTaskChange(){
+        UpdateShow();
     }
 }

@@ -25,8 +25,12 @@ public class PlayerVillageMove : MonoBehaviour {
         Vector3 vel = rigidBody.velocity;
 
         if (Mathf.Abs(h) > 0.05f || Mathf.Abs(v) > 0.05f) {
-            rigidBody.velocity = new Vector3(-h*velcoity, vel.y, -v*velcoity);
+            rigidBody.velocity = new Vector3(-h * velcoity, vel.y, -v * velcoity);
             transform.rotation = Quaternion.LookRotation(new Vector3(-h, 0, -v));
+        } else {
+            if (agent.enabled == false) {
+                rigidBody.velocity = Vector3.zero;
+            }
         }
         if (agent.enabled) {
             transform.rotation = Quaternion.LookRotation(agent.velocity);

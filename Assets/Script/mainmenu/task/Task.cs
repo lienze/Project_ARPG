@@ -29,6 +29,9 @@ public class Task {
     private int idTranscript;
     private TaskProgress taskProgress = TaskProgress.NoStart;
 
+    public delegate void OnTaskChangeEvent();//定义了一个委托
+    public event OnTaskChangeEvent OnTaskChage;//利用以上委托定义一个事件
+
     public int Id {
         get {
             return id;
@@ -124,7 +127,11 @@ public class Task {
             return taskProgress;
         }
         set {
-            taskProgress = value;
+            if (taskProgress != value) {
+                taskProgress = value;
+                OnTaskChage();
+            }
+
         }
     }
 }
