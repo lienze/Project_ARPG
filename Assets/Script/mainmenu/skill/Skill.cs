@@ -103,4 +103,8 @@ public class Skill {
             level = value;
         }
     }
+
+    public void Upgrade(){
+        Level++;
+    }
 }
