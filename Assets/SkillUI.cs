@@ -4,26 +4,34 @@ using UnityEngine;
 
 public class SkillUI : MonoBehaviour {
 
+    public static SkillUI _instance;
+
     private UILabel skillNameLabel;
     private UILabel skillDesLabel;
     private UIButton closeButton;
     private UIButton upgradeButton;
     private UILabel upgradeButtonLabel;
+    private TweenPosition tween;
     private Skill skill;
 
     void Awake(){
+        _instance = this;
         skillNameLabel = transform.Find("Bg/SkillNameLabel").GetComponent<UILabel>();
         skillDesLabel = transform.Find("Bg/DesLabel").GetComponent<UILabel>();
         closeButton = transform.Find("CloseButton").GetComponent<UIButton>();
         upgradeButton = transform.Find("UpgradeButton").GetComponent<UIButton>();
         upgradeButtonLabel = transform.Find("UpgradeButton/Label").GetComponent<UILabel>();
+        tween = this.GetComponent<TweenPosition>();
+
         skillNameLabel.text = "";
         skillDesLabel.text = "";
-
         DisableUpgradeButton("选择技能");
 
         EventDelegate ed = new EventDelegate(this, "OnUpgrade");
         upgradeButton.onClick.Add(ed);
+
+        EventDelegate ed1 = new EventDelegate(this, "OnClose");
+        closeButton.onClick.Add(ed1);
     }
 
     void DisableUpgradeButton(string label=""){
@@ -73,5 +81,14 @@ public class SkillUI : MonoBehaviour {
             DisableUpgradeButton("最大等级");
         }
 
+    }
+    public void Show(){
+        tween.PlayForward();
+    }
+    public void Hide(){
+        tween.PlayReverse();
+    }
+    void OnClose(){
+        tween.PlayReverse();
     }
 }

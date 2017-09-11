@@ -5,6 +5,7 @@ using UnityEngine;
 public class SkillItemUI : MonoBehaviour {
 
     public PosType posType;
+    public bool isSelect = false;
     private Skill skill;
     private UISprite sprite;
     private UIButton button;
@@ -27,6 +28,9 @@ public class SkillItemUI : MonoBehaviour {
 
     void Start(){
         UpdateShow();
+        if (isSelect) {
+            OnClick();
+        }
     }
 
     void UpdateShow(){

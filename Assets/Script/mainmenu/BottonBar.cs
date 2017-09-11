@@ -49,7 +49,7 @@ public class BottonBar : MonoBehaviour {
         TaskUI._instance.Show();
     }
     void OnSkill(){
-
+        SkillUI._instance.Show();
     }
     void OnShop(){
 
