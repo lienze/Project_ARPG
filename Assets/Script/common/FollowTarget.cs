@@ -6,14 +6,14 @@ public class FollowTarget : MonoBehaviour {
 
     public Vector3 offset;
 
-    private Transform player;
+    private Transform playerBip;
 
     void Start(){
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        playerBip = GameObject.FindGameObjectWithTag("Player").transform.Find("Bip01");
     }
 
 
     void Update(){
-        transform.position = player.position + offset;
+        transform.position = playerBip.position + offset;
     }
 }

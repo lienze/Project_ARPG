@@ -25,7 +25,7 @@ public class PlayerMove : MonoBehaviour {
         if (Mathf.Abs(h) > 0.05f || Mathf.Abs(v) > 0.05f) {
             anim.SetBool("Move", true);
             rigidBody.velocity = new Vector3(velocity * h, nowVel.y, v * velocity);
-
+            transform.LookAt(new Vector3(h,0,v)+transform.position);
         } else {
             anim.SetBool("Move", false);
             rigidBody.velocity = new Vector3(0, nowVel.y, 0);
