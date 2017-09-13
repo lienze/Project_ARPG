@@ -77,13 +77,13 @@ public class NcParticleSystemEditor : FXMakerEditor
 
 			m_Sel.m_bScaleWithTransform			= EditorGUILayout.Toggle	(GetHelpContent("m_bScaleWithTransform")			, m_Sel.m_bScaleWithTransform);
 			// --------------------------------------------------------------------------------------------------------------------------------------------
-			if (m_Sel.particleEmitter != null && m_Sel.m_bScaleWithTransform && m_Sel.transform.lossyScale != Vector3.one)
+			if (m_Sel.GetComponent<ParticleEmitter>() != null && m_Sel.m_bScaleWithTransform && m_Sel.transform.lossyScale != Vector3.one)
 			{
 				Rect butRect = EditorGUILayout.BeginHorizontal(GUILayout.Height(m_fButtonHeight));
 				{
 					if (FXMakerLayout.GUIButton(butRect, GetHelpContent("Convert To Static Scale"), true))
 					{
-						ConvertToStaticScale(m_Sel.particleEmitter, m_Sel.GetComponent<ParticleAnimator>());
+						ConvertToStaticScale(m_Sel.GetComponent<ParticleEmitter>(), m_Sel.GetComponent<ParticleAnimator>());
 						m_Sel.m_bScaleWithTransform	= false;
 						return;
 					}
@@ -112,13 +112,13 @@ public class NcParticleSystemEditor : FXMakerEditor
 			m_Sel.m_fStartSpeedRate				= EditorGUILayout.FloatField(GetHelpContent("m_fStartSpeedRate")				, m_Sel.m_fStartSpeedRate);
 			m_Sel.m_fRenderLengthRate			= EditorGUILayout.FloatField(GetHelpContent("m_fRenderLengthRate")				, m_Sel.m_fRenderLengthRate);
 
-			if (m_Sel.particleEmitter != null && NgSerialized.IsMeshParticleEmitter(m_Sel.particleEmitter))
+			if (m_Sel.GetComponent<ParticleEmitter>() != null && NgSerialized.IsMeshParticleEmitter(m_Sel.GetComponent<ParticleEmitter>()))
 			{
 				m_Sel.m_fLegacyMinMeshNormalVelocity= EditorGUILayout.FloatField(GetHelpContent("m_fLegacyMinMeshNormalVelocity")	, m_Sel.m_fLegacyMinMeshNormalVelocity);
 				m_Sel.m_fLegacyMaxMeshNormalVelocity= EditorGUILayout.FloatField(GetHelpContent("m_fLegacyMaxMeshNormalVelocity")	, m_Sel.m_fLegacyMaxMeshNormalVelocity);
 			}
 
-			if (m_Sel.particleSystem != null)
+			if (m_Sel.GetComponent<ParticleSystem>() != null)
 			{
 				float	fShurikenSpeedRate		= EditorGUILayout.FloatField(GetHelpContent("m_fShurikenSpeedRate")				, m_Sel.m_fShurikenSpeedRate);
 				// Set particleSystem.speed
@@ -256,27 +256,27 @@ public class NcParticleSystemEditor : FXMakerEditor
 					if (FXMakerLayout.GUIButton(FXMakerLayout.GetInnerVerticalRect(rect, 3, 0, 1), GetHelpContent("Add Shuriken Components"), true))
 					{
 						bClickButton = true;
-						m_Sel.gameObject.AddComponent("ParticleSystem");
+						m_Sel.gameObject.AddComponent<ParticleSystem>();
 						if (m_Sel.gameObject.GetComponent<ParticleSystemRenderer>() == null)
-							m_Sel.gameObject.AddComponent("ParticleSystemRenderer");
+							m_Sel.gameObject.AddComponent<ParticleSystemRenderer>();
 					}
 					if (FXMakerLayout.GUIButton(FXMakerLayout.GetInnerVerticalRect(rect, 3, 1, 1), GetHelpContent("Add Legacy(Ellipsoid) Components"), true))
 					{
 						bClickButton = true;
-						m_Sel.gameObject.AddComponent("EllipsoidParticleEmitter");
+						m_Sel.gameObject.AddComponent<EllipsoidParticleEmitter>();
 						if (m_Sel.gameObject.GetComponent<ParticleAnimator>() == null)
-							m_Sel.gameObject.AddComponent("ParticleAnimator");
+							m_Sel.gameObject.AddComponent<ParticleAnimator>();
 						if (m_Sel.gameObject.GetComponent<ParticleRenderer>() == null)
-							m_Sel.gameObject.AddComponent("ParticleRenderer");
+							m_Sel.gameObject.AddComponent<ParticleRenderer>();
 					}
 					if (FXMakerLayout.GUIButton(FXMakerLayout.GetInnerVerticalRect(rect, 3, 2, 1), GetHelpContent("Add Legacy(Mesh) Components"), true))
 					{
 						bClickButton = true;
-						m_Sel.gameObject.AddComponent("MeshParticleEmitter");
+						m_Sel.gameObject.AddComponent<MeshParticleEmitter>();
 						if (m_Sel.gameObject.GetComponent<ParticleAnimator>() == null)
-							m_Sel.gameObject.AddComponent("ParticleAnimator");
+							m_Sel.gameObject.AddComponent<ParticleAnimator>();
 						if (m_Sel.gameObject.GetComponent<ParticleRenderer>() == null)
-							m_Sel.gameObject.AddComponent("ParticleRenderer");
+							m_Sel.gameObject.AddComponent<ParticleRenderer>();
 					}
 				}
 				GUILayout.Label("");

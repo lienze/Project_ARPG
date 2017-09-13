@@ -187,7 +187,7 @@ public class NgSerialized
 		if (srcCom.ToString().Contains("MeshParticleEmitter"))
 			return tarObject.AddComponent<MeshParticleEmitter>();
 		if (srcCom.ToString().Contains("WorldParticleCollider"))
-			return tarObject.AddComponent<WorldParticleCollider>();
+            return tarObject.AddComponent(System.Type.GetType("WorldParticleCollider"));
 		Component com = tarObject.AddComponent(srcCom.GetType());
 
 		return com;
