@@ -10,9 +10,10 @@ public class TranscriptManager : MonoBehaviour {
 
     void Awake(){
         _instance = this;
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     void Start(){
-        player = GameObject.FindGameObjectWithTag("Player");
+        
     }
 }
