@@ -4,7 +4,17 @@ using UnityEngine;
 
 public class PlayerAnimation : MonoBehaviour {
 
-    public void OnAttackButtonClick(bool isPress,PosType posType){
+    private Animator anim;
 
+    void Start(){
+        anim = this.GetComponent<Animator>();
+    }
+
+    public void OnAttackButtonClick(bool isPress,PosType posType){
+        if (posType == PosType.Basic) {
+            if (isPress) {
+                anim.SetTrigger("Attack");
+            }
+        }
     }
 }

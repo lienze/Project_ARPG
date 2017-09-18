@@ -26,9 +26,11 @@ public class SkillButton : MonoBehaviour {
         if (coldTimer > 0) {
             coldTimer -= Time.deltaTime;
             maskSprite.fillAmount = coldTimer / coldTime;
+            if (coldTimer <= 0) {
+                Enable();
+            }
         } else {
             maskSprite.fillAmount = 0;
-            Enable();
         }
     }
 
@@ -38,6 +40,9 @@ public class SkillButton : MonoBehaviour {
             coldTimer = coldTime;
             Disable();
         }
+        if (posType == PosType.Basic) {
+            Enable();
+        }
     }
 
     void Disable(){
@@ -46,6 +51,5 @@ public class SkillButton : MonoBehaviour {
     }
     void Enable(){
         this.GetComponent<Collider>().enabled = true;
-        btn.SetState(UIButtonColor.State.Normal, true);
     }
 }
