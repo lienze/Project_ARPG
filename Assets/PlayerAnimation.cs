@@ -15,6 +15,8 @@ public class PlayerAnimation : MonoBehaviour {
             if (isPress) {
                 anim.SetTrigger("Attack");
             }
+        } else {
+            anim.SetBool("Skill" + (int)posType, isPress);
         }
     }
 }
