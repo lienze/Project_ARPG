@@ -26,6 +26,11 @@ public class PlayerAttack : MonoBehaviour {
         //2 play sound
         string soundName = proArray[2];
         SoundManager._instance.Play(soundName);
+        //3 move forward 控制前冲的效果
+        float moveForward = float.Parse(proArray[3]);
+        if (moveForward > 0.1f) {
+            iTween.MoveBy(this.gameObject, Vector3.forward * moveForward, 0.03f);
+        }
     }
 
     void ShowPlayerEffect(string effectName){
